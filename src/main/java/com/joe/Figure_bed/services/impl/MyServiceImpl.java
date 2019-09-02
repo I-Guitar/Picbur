@@ -32,7 +32,7 @@ public class MyServiceImpl implements MyService {
                 InputStream inputStream = new ByteArrayInputStream(bytes)
         ) {
             String ossUrl = ossService.putObject("joe-data", getFilePath(filename, bytes), inputStream);
-            return ossUrl + "<a>fanhui</a>";
+            return ossUrl;
         }
     }
 
