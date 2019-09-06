@@ -26,13 +26,15 @@ public class MyServiceImpl implements MyService {
     @Autowired
     private AliOssService ossService;
 
+    private static final MessageFormat HTML_FORMAT = new MessageFormat("<br/><div style=\"text-align: center;\"><img src=\"{0}\"/><br/><br/>{0}</div>");
+
     @Override
     public String upload(String filename, byte[] bytes) throws IOException, NoSuchAlgorithmException {
         try (
                 InputStream inputStream = new ByteArrayInputStream(bytes)
         ) {
             String ossUrl = ossService.putObject("joe-data", getFilePath(filename, bytes), inputStream);
-            return ossUrl;
+            return HTML_FORMAT.format(new Object[]{ossUrl});
         }
     }
 
