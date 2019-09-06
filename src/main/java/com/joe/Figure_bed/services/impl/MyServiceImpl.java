@@ -26,7 +26,8 @@ public class MyServiceImpl implements MyService {
     @Autowired
     private AliOssService ossService;
 
-    private static final MessageFormat HTML_FORMAT = new MessageFormat("<br/><div style=\"text-align: center;\"><img src=\"{0}\"/><br/><br/>{0}</div>");
+    private static final MessageFormat HTML_FORMAT = new MessageFormat("" +
+            "<br/><div style=\"text-align: center;\"><img src=\"{0}\"/><br/><br/><input style=\"width:700px;\" type=\"text\" value=\"{0}\"/></div>");
 
     @Override
     public String upload(String filename, byte[] bytes) throws IOException, NoSuchAlgorithmException {
