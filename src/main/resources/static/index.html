@@ -4,14 +4,16 @@
     <meta charset="utf-8">
     <script type="application/javascript" src="js/jquery-3.4.1-min.js"></script>
     <script type="application/javascript" src="js/index.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/index.css">
 </head>
 <body>
-<form action="/imageUpload" method="post" enctype="multipart/form-data">
-    <input name="image" type="file" accept="image/gif, image/jpeg, image/png, image/jpg"/><br>
-    <input type="submit">
-</form>
-<input id="image" name="image" type="file" accept="image/gif, image/jpeg, image/png, image/jpg"/><br>
-<button id="commit">commit</button>
+<div>
+    <input id="image" name="image" type="file" accept="image/gif, image/jpeg, image/png, image/jpg"/><br>
+    <button id="commit">commit</button>
+</div>
+<hr>
+<div id="result-div">
+</div>
 </body>
 </html>
 

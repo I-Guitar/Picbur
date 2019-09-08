@@ -1,6 +1,8 @@
+const RESULT_TEMP = "<div><img class=\"result-img\" src=\"{LINK}\" alt=\"img\"/><br/><input class=\"result-input\" type=\"text\" value=\"{LINK}\"/></div>";
+
 $(function () {
     $("#commit").on("click", function () {
-        var formData = new FormData();
+        let formData = new FormData();
         formData.append('image', $('#image')[0].files[0]);  //添加图片信息的参数
         // formData.append('sizeid', 123);  //添加其他参数
         $.ajax({
@@ -11,18 +13,31 @@ $(function () {
             processData: false, // 告诉jQuery不要去处理发送的数据
             contentType: false, // 告诉jQuery不要去设置Content-Type请求头
             success: function (data) {
-                var rs = eval("(" + data + ")");
-                if (rs.state == 1) {
-                    tipTopShow('上传成功！');
-                } else {
-                    tipTopShow(rs.msg);
-                }
+                $("#result-div").append($(RESULT_TEMP.replace(/{LINK}/g, data)))
             },
             error: function (data) {
-                tipTopShow("上传失败");
+                window.alert("Failed! => " + data);
             }
         });
     });
+
+    $("#result-div").on("click", ".result-input", copyValue);
+
+    /**
+     * 拷贝输入框中的值到剪切板
+     * */
+    function copyValue() {
+        if (window.clipboardData) {
+            window.clipboardData.clearData();
+            window.clipboardData.setData("Text", this.value);
+            alert("复制成功");
+        } else {
+            $("#result-div").unbind();
+            alert("请手动复制！")
+        }
+
+    }
+
 });
 
 
