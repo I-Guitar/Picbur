@@ -8,10 +8,10 @@
         <version>2.1.5.RELEASE</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-    <groupId>com.joe</groupId>
-    <artifactId>Figure_bed</artifactId>
+    <groupId>com.hujinwen</groupId>
+    <artifactId>oss-pic-bed</artifactId>
     <version>0.1.0</version>
-    <name>Figure_bed</name>
+    <name>oss-pic-bed</name>
 
     <properties>
         <java.version>1.8</java.version>
