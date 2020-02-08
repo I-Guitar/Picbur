@@ -1,18 +1,23 @@
 package com.joe.Figure_bed.services.impl;
 
+import com.joe.Figure_bed.entity.UploadRecordItem;
 import com.joe.Figure_bed.services.AliOssService;
 import com.joe.Figure_bed.services.MyService;
 import com.joe.Figure_bed.utils.Tools;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.PostConstruct;
 import java.io.ByteArrayInputStream;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.security.NoSuchAlgorithmException;
 import java.text.MessageFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.LinkedList;
+import java.util.List;
 
 /**
  * Created by joe on 2019/6/16
@@ -26,13 +31,53 @@ public class MyServiceImpl implements MyService {
     @Autowired
     private AliOssService ossService;
 
+    private LinkedList<UploadRecordItem> uploadRecord = new LinkedList<>();
+
+    private final String serializeFilePath = Tools.getResourcePath() + "/" + "upload_record_cache";
+
+    @PostConstruct
+    public void init() throws IOException, ClassNotFoundException {
+        if (new File(serializeFilePath).exists()) {
+            uploadRecord = Tools.deserializeObj(serializeFilePath);
+        }
+    }
+
+    /**
+     * 上传图片
+     */
     @Override
-    public String upload(String filename, byte[] bytes) throws IOException, NoSuchAlgorithmException {
+    public UploadRecordItem upload(String filename, byte[] bytes) throws IOException, NoSuchAlgorithmException {
         try (
                 InputStream inputStream = new ByteArrayInputStream(bytes)
         ) {
-            return ossService.putObject("joe-data", getFilePath(filename, bytes), inputStream);
+            final String url = ossService.putObject("joe-data", getFilePath(filename, bytes), inputStream);
+
+            recordUpload(url);
+
+            return uploadRecord.getLast();
         }
+    }
+
+    @Override
+    public List<UploadRecordItem> getUploadRecords() {
+        return uploadRecord;
+    }
+
+    /**
+     * 记录上传信息
+     *
+     * @param url 上传成功后的url
+     */
+    private void recordUpload(String url) throws IOException {
+        final long uploadTime = System.currentTimeMillis();
+        final UploadRecordItem uploadRecordItem = new UploadRecordItem(url, uploadTime);
+        uploadRecord.add(uploadRecordItem);
+
+        if (uploadRecord.size() > 9) {
+            uploadRecord.remove(0);
+        }
+
+        Tools.serializeObj(uploadRecord, serializeFilePath);
     }
 
     private String getFilePath(String filename, byte[] bytes) throws NoSuchAlgorithmException {

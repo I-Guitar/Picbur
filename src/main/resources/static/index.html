@@ -2,17 +2,60 @@
 <head>
     <title>图床</title>
     <meta charset="utf-8">
-    <script type="application/javascript" src="js/jquery-3.4.1-min.js"></script>
-    <script type="application/javascript" src="js/index.js"></script>
     <link rel="stylesheet" type="text/css" href="css/index.css">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+    <script type="application/javascript" src="js/jquery-3.4.1-min.js"></script>
+    <script type="application/javascript" src="js/bootstrap.min.js"></script>
+    <script type="application/javascript" src="js/index.js"></script>
 </head>
 <body>
-<div>
-    <input id="image" name="image" type="file" accept="image/gif, image/jpeg, image/png, image/jpg"/><br>
-    <button id="commit">commit</button>
-</div>
-<hr>
-<div id="result-div">
+<div class="margin-top-50">
+    <div class="container">
+        <div class="row clearfix">
+            <div class="col-md-12 column">
+                <div class="tabbable" id="tabs-857178">
+                    <ul class="nav nav-tabs">
+                        <li class="active">
+                            <a href="#panel-844737" data-toggle="tab">上传图片</a>
+                        </li>
+                        <li>
+                            <a href="#panel-805177" data-toggle="tab">历史记录</a>
+                        </li>
+                    </ul>
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="panel-844737">
+                            <input id="image" name="image" type="file"
+                                   accept="image/gif, image/jpeg, image/png, image/jpg"/>
+                            <button id="commit" class="margin-left-50">commit</button>
+                            <div class="margin-top-15">
+                                <img id="last-img" src="img/1.jpg" alt="" title="最近上传"/>
+                            </div>
+                        </div>
+                        <div class="tab-pane" id="panel-805177">
+                            <br>
+                            <p></p>
+                            <p></p>
+                            <p></p>
+                            <div id="upload-records-div" class="row">
+                                <div class="col-md-4" hidden>
+                                    <div class="thumbnail">
+                                        <img alt="300x200" style="width: 200px; height: 200px" src="v3/default4.jpg"/>
+                                        <div class="caption">
+                                            <p class="url"></p>
+                                            <p>
+                                                <a class="btn btn-primary" href="#">Copy</a>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
 </div>
 </body>
 </html>

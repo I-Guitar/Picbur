@@ -1,5 +1,6 @@
 package com.joe.Figure_bed.utils;
 
+import java.io.*;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
@@ -27,6 +28,37 @@ public class Tools {
             return fileName.substring(index + 1);
         }
         return "";
+    }
+
+    /**
+     * 获取resource绝对路径
+     */
+    public static String getResourcePath() {
+        return Tools.class.getClassLoader().getResource("").getPath();
+    }
+
+    /**
+     * 对象序列化
+     */
+    public static void serializeObj(Serializable obj, String path) throws IOException {
+        try (
+                final FileOutputStream fileOutputStream = new FileOutputStream(path);
+                final ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream)
+        ) {
+            objectOutputStream.writeObject(obj);
+        }
+    }
+
+    /**
+     * 对象反序列化
+     */
+    public static <T> T deserializeObj(String path) throws IOException, ClassNotFoundException {
+        try (
+                final FileInputStream fileInputStream = new FileInputStream(path);
+                final ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream)
+        ) {
+            return (T) objectInputStream.readObject();
+        }
     }
 
     public static String getImageExtraName(String fileName) {

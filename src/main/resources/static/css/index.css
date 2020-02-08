@@ -2,11 +2,28 @@
     text-align: center;
 }
 
-.result-img {
-    width: 300px;
-    height: 300px;
-}
-
 .result-input {
     width: 700px;
+}
+
+/*图片上传框样式*/
+#image {
+    margin-top: 10px;
+    display: inline-block;
+}
+
+.margin-top-15 {
+    margin-top: 15px;
+}
+
+.margin-top-50 {
+    margin-top: 50px;
+}
+
+.margin-left-50 {
+    margin-left: 50px;
+}
+
+.inline-block {
+    display: inline-block;
 }
