@@ -33,7 +33,7 @@ public class MyServiceImpl implements MyService {
 
     private LinkedList<UploadRecordItem> uploadRecord = new LinkedList<>();
 
-    private final String serializeFilePath = Tools.getResourcePath() + "/" + "upload_record_cache";
+    private final String serializeFilePath = "./upload_record_cache";
 
     @PostConstruct
     public void init() throws IOException, ClassNotFoundException {

@@ -8,8 +8,8 @@ import org.springframework.context.annotation.PropertySource;
 @PropertySource("classpath:conf.properties")
 public class FigureBedApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(FigureBedApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(FigureBedApplication.class, args);
+    }
 
 }
