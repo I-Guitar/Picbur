@@ -9,6 +9,16 @@
     <script type="application/javascript" src="js/index.js"></script>
 </head>
 <body>
+<!-- 页面等待蒙版 -->
+<div id="masking-bg" hidden>
+    <div style="position: relative;top: 40%;left: 50%"><b>上传中...</b></div>
+</div>
+<!-- copy暂存 -->
+<input type="text" id="copy-cache" style="position: absolute; top: -99999999999999px"/>
+<!---->
+<!-- 弹窗提示 -->
+<div class="alert"></div>
+<!---->
 <div class="margin-top-50">
     <div class="container">
         <div class="row clearfix">
@@ -28,7 +38,30 @@
                                    accept="image/gif, image/jpeg, image/png, image/jpg"/>
                             <button id="commit" class="margin-left-50">commit</button>
                             <div class="margin-top-15">
-                                <img id="last-img" src="img/1.jpg" alt="" title="最近上传"/>
+                                <div id="last-upload" class="col-md-4 margin-left--15">
+                                    <div class="thumbnail">
+                                        <img alt="300x200" src="img/1.jpg" title="最近上传"/>
+                                        <div class="caption">
+                                            <table class="inner-th-width-50">
+                                                <tbody>
+                                                <tr>
+                                                    <th>time</th>
+                                                    <td><span
+                                                            class="time hidden-display-span">1996-09-02 00:00:00</span>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <th>url</th>
+                                                    <td><span class="url hidden-display-span">img/1.jpg</span></td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                            <p class="margin-top-10">
+                                                <a class="copy btn btn-primary" href="#">Copy</a>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <div class="tab-pane" id="panel-805177">
@@ -39,11 +72,22 @@
                             <div id="upload-records-div" class="row">
                                 <div class="col-md-4" hidden>
                                     <div class="thumbnail">
-                                        <img alt="300x200" style="width: 200px; height: 200px" src="v3/default4.jpg"/>
+                                        <img alt="300x200" src=""/>
                                         <div class="caption">
-                                            <p class="url"></p>
-                                            <p>
-                                                <a class="btn btn-primary" href="#">Copy</a>
+                                            <table class="inner-th-width-50">
+                                                <tbody>
+                                                <tr>
+                                                    <th>time</th>
+                                                    <td><span class="time hidden-display-span"></span></td>
+                                                </tr>
+                                                <tr>
+                                                    <th>url</th>
+                                                    <td><span class="url hidden-display-span"></span></td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                            <p class="margin-top-10">
+                                                <a class="copy btn btn-primary" href="#">Copy</a>
                                             </p>
                                         </div>
                                     </div>
