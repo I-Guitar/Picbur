@@ -1,7 +1,7 @@
-package com.joe.Figure_bed.faced;
+package com.joe.picBed.faced;
 
-import com.joe.Figure_bed.entity.UploadRecordItem;
-import com.joe.Figure_bed.services.MyService;
+import com.joe.picBed.entity.UploadRecordItem;
+import com.joe.picBed.services.MyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;

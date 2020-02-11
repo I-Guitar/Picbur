@@ -1,8 +1,9 @@
-package com.joe.Figure_bed.utils;
+package com.joe.picBed.utils;
 
 import java.io.*;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.Properties;
 
 /**
  * Created by joe on 19-6-16
@@ -35,6 +36,19 @@ public class Tools {
      */
     public static String getResourcePath() {
         return Tools.class.getClassLoader().getResource("").getPath();
+    }
+
+    /**
+     * 读取properties文件内容，以properties对象返回
+     */
+    public static Properties readFileForProp(String path) throws IOException {
+        final Properties prop = new Properties();
+        try (
+                final FileInputStream fileInputStream = new FileInputStream(path)
+        ) {
+            prop.load(fileInputStream);
+        }
+        return prop;
     }
 
     /**

@@ -1,4 +1,4 @@
-package com.joe.Figure_bed.entity;
+package com.joe.picBed.entity;
 
 import java.io.Serializable;
 

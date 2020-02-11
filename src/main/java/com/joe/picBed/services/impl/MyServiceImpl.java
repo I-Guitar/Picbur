@@ -1,9 +1,9 @@
-package com.joe.Figure_bed.services.impl;
+package com.joe.picBed.services.impl;
 
-import com.joe.Figure_bed.entity.UploadRecordItem;
-import com.joe.Figure_bed.services.AliOssService;
-import com.joe.Figure_bed.services.MyService;
-import com.joe.Figure_bed.utils.Tools;
+import com.joe.picBed.entity.UploadRecordItem;
+import com.joe.picBed.services.AliOssService;
+import com.joe.picBed.services.MyService;
+import com.joe.picBed.utils.Tools;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

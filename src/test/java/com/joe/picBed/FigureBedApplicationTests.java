@@ -1,4 +1,4 @@
-package com.joe.Figure_bed;
+package com.joe.picBed;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

@@ -1,6 +1,6 @@
-package com.joe.Figure_bed.services;
+package com.joe.picBed.services;
 
-import com.joe.Figure_bed.entity.UploadRecordItem;
+import com.joe.picBed.entity.UploadRecordItem;
 
 import java.util.List;
 

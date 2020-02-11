@@ -1,4 +1,4 @@
-package com.joe.Figure_bed.conf;
+package com.joe.picBed.conf;
 
 import org.springframework.boot.web.servlet.MultipartConfigFactory;
 import org.springframework.context.annotation.Bean;
