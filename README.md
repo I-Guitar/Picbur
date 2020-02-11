@@ -13,13 +13,40 @@
 
 ## 使用
 
+### 开箱即用
+
+1. 下载[releases](https://github.com/I-Guitar/oss-pic-bed/releases)中编译好的jar包
+
+2. 在jar包同目录下创建`conf.properties`文件，内容如下：
+
+   ```properties
+   # 替换 xxx 为你自己的
+   endpoint=xxx
+   accessKeyId=xxx
+   secretAccessKey=xxx
+   ```
+
+3. `java -jar xxx.jar`直接运行
+
+4. `http://<ip>:8080` 访问
+
+
+
+### 自行编译
+
 1. 将`resources`中的`conf.properties.example`文件拷贝一份命名为`conf.properties`。
 2. 按照其中内容填写好自己的oss endpoint、accessKeyId、secretAccessKey。
 3. 直接maven打包
 4. java -jar运行jar包
+5. `http://<ip>:8080` 访问
+
+
 
 ## 最近更新
 
+* 2020年02月11日  1.0.1正式版发布：
+  * 取消oss配置文件硬编码到代码
+  * 上传编译好可执行的jar文件
 * 2020年02月09日  1.0.0正式版发布：
   * 添加图片上传日期显示
   * 历史记录图片修改为缩略图，省流
