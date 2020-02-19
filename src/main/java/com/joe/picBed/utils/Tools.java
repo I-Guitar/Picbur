@@ -1,6 +1,7 @@
 package com.joe.picBed.utils;
 
 import java.io.*;
+import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Properties;
@@ -18,6 +19,16 @@ public class Tools {
             sb.append(String.format("%02X", b));  // 10进制字符转16进制
         }
         return sb.toString().toLowerCase();
+    }
+
+    /**
+     * 字符串做md5
+     */
+    public static String md5(String str) throws NoSuchAlgorithmException {
+        MessageDigest md = MessageDigest.getInstance("MD5");
+        // 计算md5函数
+        md.update(str.getBytes());
+        return new BigInteger(1, md.digest()).toString(16);
     }
 
     /**

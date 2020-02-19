@@ -2,7 +2,7 @@ package com.joe.picBed.services.impl;
 
 import com.joe.picBed.entity.UploadRecordItem;
 import com.joe.picBed.services.AliOssService;
-import com.joe.picBed.services.MyService;
+import com.joe.picBed.services.UploadService;
 import com.joe.picBed.utils.Tools;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,7 +23,7 @@ import java.util.List;
  * Created by joe on 2019/6/16
  */
 @Service
-public class MyServiceImpl implements MyService {
+public class UploadServiceImpl implements UploadService {
     private static final ThreadLocal<SimpleDateFormat> threadLocal = ThreadLocal.withInitial(() -> new SimpleDateFormat("yyyy-MM-dd"));
 
     private final MessageFormat pathFormat = new MessageFormat("Figure-bed/{0}/{1}.{2}");

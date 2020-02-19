@@ -1,3 +1,9 @@
+#
+# >>>>>>>>>>>>>>>>>>>> OSS 配置 <<<<<<<<<<<<<<<<<<<<<<<
 endpoint=
 accessKeyId=
 secretAccessKey=
+#
+# >>>>>>>>>>>>>>>>>>>> 用户 配置 <<<<<<<<<<<<<<<<<<<<<<<
+user=admin
+password=admin
