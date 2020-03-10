@@ -22,6 +22,7 @@
    ```properties
    # 替换 xxx 为你自己的
    endpoint=xxx
+   bucketName=xxx
    accessKeyId=xxx
    secretAccessKey=xxx
    ```
