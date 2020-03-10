@@ -50,7 +50,7 @@ public class MyServiceImpl implements MyService {
         try (
                 InputStream inputStream = new ByteArrayInputStream(bytes)
         ) {
-            final String url = ossService.putObject("joe-data", getFilePath(filename, bytes), inputStream);
+            final String url = ossService.putObject(getFilePath(filename, bytes), inputStream);
 
             recordUpload(url);
 

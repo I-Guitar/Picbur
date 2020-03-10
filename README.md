@@ -38,12 +38,14 @@
 2. 按照其中内容填写好自己的oss endpoint、accessKeyId、secretAccessKey。
 3. 直接maven打包
 4. java -jar运行jar包
-5. `http://<ip>:8080` 访问
+5. `http://<ip>:8868` 访问
 
 
 
 ## 最近更新
-
+* 2020年03月10日  1.0.2正式版发布：
+  * 修改oss bucketName硬编码错误
+  * 端口号修改，由`8080`改为`8868`
 * 2020年02月11日  1.0.1正式版发布：
   * 取消oss配置文件硬编码到代码
   * 上传编译好可执行的jar文件

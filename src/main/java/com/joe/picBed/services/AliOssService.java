@@ -22,6 +22,9 @@ public class AliOssService {
     @Value("${endpoint}")
     private String endpoint;
 
+    @Value("${bucketName}")
+    private String bucketName;
+
     @Value("${accessKeyId}")
     private String accessKeyId;
 
@@ -35,11 +38,12 @@ public class AliOssService {
     @PostConstruct
     private void init() throws IOException {
         // accessKey校验
-        if (StringUtils.isEmpty(endpoint) || StringUtils.isEmpty(accessKeyId) || StringUtils.isEmpty(secretAccessKey)) {
+        if (StringUtils.isEmpty(endpoint) || StringUtils.isEmpty(accessKeyId) || StringUtils.isEmpty(secretAccessKey) || StringUtils.isEmpty(bucketName)) {
             final Properties prop = Tools.readFileForProp("conf.properties");
             endpoint = prop.getProperty("endpoint");
             accessKeyId = prop.getProperty("accessKeyId");
             secretAccessKey = prop.getProperty("secretAccessKey");
+            bucketName = prop.getProperty("bucketName");
 
             if (StringUtils.isEmpty(endpoint) || StringUtils.isEmpty(accessKeyId) || StringUtils.isEmpty(secretAccessKey)) {
                 throw new RuntimeException("The configuration file must have full parameters, Please check the 'conf.properties'");
@@ -48,7 +52,7 @@ public class AliOssService {
         ossClient = new OSSClient(endpoint, new DefaultCredentialProvider(accessKeyId, secretAccessKey), null);
     }
 
-    public String putObject(String bucketName, String objectName, InputStream inputStream) {
+    public String putObject(String objectName, InputStream inputStream) {
         ossClient.putObject(bucketName, objectName, inputStream);
         return urlFormat.format(new Object[]{bucketName, endpoint, objectName});
     }
