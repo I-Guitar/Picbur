@@ -15,7 +15,7 @@
 
 ### 开箱即用
 
-1. 下载[releases](https://github.com/I-Guitar/oss-pic-bed/releases)中编译好的jar包
+1. 下载[releases](https://github.com/I-Guitar/Picbur/releases)中编译好的jar包
 
 2. 在jar包同目录下创建`conf.properties`文件，内容如下：
 
