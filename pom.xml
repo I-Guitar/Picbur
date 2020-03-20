@@ -9,9 +9,9 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.hujinwen</groupId>
-    <artifactId>oss-pic-bed</artifactId>
-    <version>1.0.2</version>
-    <name>oss-pic-bed</name>
+    <artifactId>Picbur</artifactId>
+    <version>2.0.0</version>
+    <name>Picbur</name>
 
     <properties>
         <java.version>1.8</java.version>
@@ -32,11 +32,11 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/com.aliyun.oss/aliyun-sdk-oss -->
+        <!-- https://mvnrepository.com/artifact/io.minio/minio -->
         <dependency>
-            <groupId>com.aliyun.oss</groupId>
-            <artifactId>aliyun-sdk-oss</artifactId>
-            <version>3.5.0-beta</version>
+            <groupId>io.minio</groupId>
+            <artifactId>minio</artifactId>
+            <version>6.0.13</version>
         </dependency>
     </dependencies>
 

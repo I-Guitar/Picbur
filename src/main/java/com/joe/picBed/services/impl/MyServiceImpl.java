@@ -1,7 +1,8 @@
 package com.joe.picBed.services.impl;
 
 import com.joe.picBed.entity.UploadRecordItem;
-import com.joe.picBed.services.AliOssService;
+import com.joe.picBed.entity.exceptions.MinioPutObjectException;
+import com.joe.picBed.services.ImageStoreService;
 import com.joe.picBed.services.MyService;
 import com.joe.picBed.utils.Tools;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,10 +27,10 @@ import java.util.List;
 public class MyServiceImpl implements MyService {
     private static final ThreadLocal<SimpleDateFormat> threadLocal = ThreadLocal.withInitial(() -> new SimpleDateFormat("yyyy-MM-dd"));
 
-    private final MessageFormat pathFormat = new MessageFormat("Figure-bed/{0}/{1}.{2}");
+    private final MessageFormat pathFormat = new MessageFormat("pic-bed/{0}/{1}.{2}");
 
     @Autowired
-    private AliOssService ossService;
+    private ImageStoreService imageStoreService;
 
     private LinkedList<UploadRecordItem> uploadRecord = new LinkedList<>();
 
@@ -46,11 +47,11 @@ public class MyServiceImpl implements MyService {
      * 上传图片
      */
     @Override
-    public UploadRecordItem upload(String filename, byte[] bytes) throws IOException, NoSuchAlgorithmException {
+    public UploadRecordItem upload(String filename, byte[] bytes) throws IOException, NoSuchAlgorithmException, MinioPutObjectException {
         try (
                 InputStream inputStream = new ByteArrayInputStream(bytes)
         ) {
-            final String url = ossService.putObject(getFilePath(filename, bytes), inputStream);
+            final String url = imageStoreService.putImg(getFilePath(filename, bytes), inputStream);
 
             recordUpload(url);
 
@@ -83,8 +84,8 @@ public class MyServiceImpl implements MyService {
     private String getFilePath(String filename, byte[] bytes) throws NoSuchAlgorithmException {
         String folder = threadLocal.get().format(new Date());
         String fileName = Tools.md5(bytes);
-        String extractName = Tools.getImageExtraName(filename);
-        return pathFormat.format(new Object[]{folder, fileName, extractName});
+        String extName = Tools.getImageExtName(filename);
+        return pathFormat.format(new Object[]{folder, fileName, extName});
     }
 
 }

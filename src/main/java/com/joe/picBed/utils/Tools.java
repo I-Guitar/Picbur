@@ -1,14 +1,43 @@
 package com.joe.picBed.utils;
 
+import com.joe.picBed.entity.enums.ContentType;
+import com.joe.picBed.entity.enums.FileType;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.util.StringUtils;
+
 import java.io.*;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Objects;
 import java.util.Properties;
 
 /**
  * Created by joe on 19-6-16
  */
 public class Tools {
+    private static final Logger logger = LoggerFactory.getLogger(Tools.class);
+
+    private static final Map<String, String> STREAM_TYPE_MAPPER = new HashMap<>();
+
+    private static final Map<String, String> CONTENT_TYPE_MAPPER = new HashMap<>();
+
+    static {
+        for (FileType fileType : FileType.values()) {
+            final String typeName = fileType.typeName;
+
+            for (String code : fileType.streamCodes) {
+                STREAM_TYPE_MAPPER.put(code, typeName);
+            }
+        }
+
+        for (ContentType contentType : ContentType.values()) {
+            CONTENT_TYPE_MAPPER.put(contentType.fileType, contentType.contentType);
+        }
+    }
+
     /**
      * 字节数组做md5加密
      */
@@ -21,21 +50,63 @@ public class Tools {
     }
 
     /**
-     * 获取文件扩展名
+     * 预测文件扩展名
      */
-    public static String getExtraName(String fileName) {
-        int index = fileName.lastIndexOf(".");
+    public static String predictExtName(String filePath) {
+        int index = filePath.lastIndexOf(".");
         if (index > 0) {
-            return fileName.substring(index + 1);
+            return filePath.substring(index + 1);
         }
         return "";
+    }
+
+    /**
+     * 预测文件扩展名
+     * <p>
+     * * 预测过后的 input stream 不可用
+     */
+    public static String predictExtName(InputStream inputStream) {
+        try {
+            byte[] bytes = new byte[5];
+            if (inputStream.read(bytes, 0, bytes.length) > -1) {
+                String fileCode = bytesToHexString(bytes);
+
+                if (fileCode != null && fileCode.length() == 10) {
+                    return STREAM_TYPE_MAPPER.get(fileCode.toLowerCase());
+                }
+            }
+        } catch (Exception e) {
+            logger.warn("Can't predict extract name from input stream!", e);
+        }
+        return "";
+    }
+
+    /**
+     * 预测 http Content-Type
+     * <p>
+     * * 读取过后的 input stream 不可用
+     */
+    public static String predictContentType(InputStream inputStream) {
+        final String extName = predictExtName(inputStream);
+        if (StringUtils.isEmpty(extName)) {
+            return ContentType.DEFAULT.contentType;
+        }
+        return predictContentType(extName);
+    }
+
+    /**
+     * 预测 http Content-Type
+     */
+    public static String predictContentType(String extName) {
+        final String contentType = CONTENT_TYPE_MAPPER.get(extName);
+        return contentType == null ? ContentType.DEFAULT.contentType : contentType;
     }
 
     /**
      * 获取resource绝对路径
      */
     public static String getResourcePath() {
-        return Tools.class.getClassLoader().getResource("").getPath();
+        return Objects.requireNonNull(Tools.class.getClassLoader().getResource("")).getPath();
     }
 
     /**
@@ -75,9 +146,9 @@ public class Tools {
         }
     }
 
-    public static String getImageExtraName(String fileName) {
-        String extraName = getExtraName(fileName);
-        return extraName.length() > 0 ? extraName : "jpg";
+    public static String getImageExtName(String fileName) {
+        String extraName = predictExtName(fileName);
+        return extraName.length() > 0 ? extraName : "png";
     }
 
     private static byte[] md5ToBytes(byte[] bytes) throws NoSuchAlgorithmException {
@@ -85,4 +156,25 @@ public class Tools {
         md5.update(bytes);
         return md5.digest();
     }
+
+    /**
+     * 字节数组转字符串
+     */
+    private static String bytesToHexString(byte[] src) {
+        final StringBuilder stringBuilder = new StringBuilder();
+        if (null == src || src.length < 1) {
+            return null;
+        }
+        for (byte b : src) {
+            int v = b & 0xFF;
+            String hv = Integer.toHexString(v);
+            if (hv.length() < 2) {
+                stringBuilder.append(0);
+            }
+            stringBuilder.append(hv);
+        }
+        return stringBuilder.toString();
+    }
+
+
 }
