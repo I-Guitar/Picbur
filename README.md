@@ -48,7 +48,7 @@
 ## 最近更新
 * 2020年03月20日  2.0.0正式版发布（重大更新，前期版本不可用）：
   * 将内置存储由 阿里OSS 改为 MinIO。自己搭建 MinIO 集群，0费用
-  * 新增测试接口 [image.i-guitar.cn](http://image.i-guitar.cn)
+  * 新增测试接口 [picbur.hujinwen.com](http://picbur.hujinwen.com)
 * 2020年03月10日  1.0.2正式版发布：
   * 修改oss bucketName硬编码错误
   * 端口号修改，由`8080`改为`8868`
