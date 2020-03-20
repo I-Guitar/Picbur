@@ -3,7 +3,7 @@
 [TOC]
 
 
-**体验接口：[image.i-guitar.cn](http://image.i-guitar.cn)**
+**体验接口：[picbur.hujinwen.com](http://picbur.hujinwen.com)**
 
 ## 简介
 > 其实都是无用的话。。大佬们请直接看[使用](#使用)
