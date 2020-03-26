@@ -1,10 +1,12 @@
 package com.joe.picBed.services.impl;
 
+import com.joe.picBed.entity.MinIONode;
 import com.joe.picBed.entity.exceptions.MinioInitializeException;
 import com.joe.picBed.entity.exceptions.MinioPutObjectException;
 import com.joe.picBed.services.ImageStoreService;
+import com.joe.picBed.utils.RandomUtils;
 import com.joe.picBed.utils.Tools;
-import com.joe.picBed.utils.server.MyMinioClient;
+import com.joe.picBed.utils.server.MinIOCluster;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
@@ -20,7 +22,7 @@ import java.util.Properties;
 @Service
 public class ImageStoreServiceImpl implements ImageStoreService {
 
-    @Value("${endpoint}")
+    @Value("${endpoints}")
     private String endpoint;
 
     @Value("${bucketName}")
@@ -32,24 +34,26 @@ public class ImageStoreServiceImpl implements ImageStoreService {
     @Value("${secretAccessKey}")
     private String secretAccessKey;
 
-    private MyMinioClient minIOClient;
+    private MinIOCluster minIOCluster;
+
+    private String[] endpoints;
 
     private static final MessageFormat URL_FORMAT = new MessageFormat("{0}/{1}/{2}");
 
     @Override
     public String putImg(String objectName, InputStream inputStream) throws MinioPutObjectException, IOException {
-        if (minIOClient == null) {
+        if (minIOCluster == null) {
             clientInit();
         }
-        minIOClient.putImg(bucketName, objectName, inputStream);
-        return URL_FORMAT.format(new Object[]{endpoint, bucketName, objectName});
+        minIOCluster.putImg(bucketName, objectName, inputStream);
+        return URL_FORMAT.format(new Object[]{RandomUtils.randomChoice(endpoints), bucketName, objectName});
     }
 
     private void clientInit() throws IOException {
         // accessKey校验
         if (StringUtils.isEmpty(endpoint) || StringUtils.isEmpty(accessKeyId) || StringUtils.isEmpty(secretAccessKey) || StringUtils.isEmpty(bucketName)) {
             final Properties prop = Tools.readFileForProp("conf.properties");
-            endpoint = prop.getProperty("endpoint");
+            endpoint = prop.getProperty("endpoints");
             accessKeyId = prop.getProperty("accessKeyId");
             secretAccessKey = prop.getProperty("secretAccessKey");
             bucketName = prop.getProperty("bucketName");
@@ -58,8 +62,18 @@ public class ImageStoreServiceImpl implements ImageStoreService {
                 throw new RuntimeException("The configuration file must have full parameters, Please check the 'conf.properties'");
             }
         }
+
+        endpoints = endpoint.split(";");
+        final MinIONode[] nodes = new MinIONode[endpoints.length];
+        for (int i = 0; i < endpoints.length; i++) {
+            if (!endpoints[i].startsWith("http")) {
+                endpoints[i] = "http://" + endpoints[i];
+            }
+            nodes[i] = new MinIONode(endpoints[i], accessKeyId, secretAccessKey);
+        }
+
         try {
-            minIOClient = new MyMinioClient(endpoint, accessKeyId, secretAccessKey);
+            minIOCluster = new MinIOCluster(nodes);
         } catch (MinioInitializeException e) {
             throw new RuntimeException(e);
         }
