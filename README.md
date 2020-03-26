@@ -2,10 +2,12 @@
 
 [TOC]
 
+
+**体验接口：[picbur.hujinwen.com](http://picbur.hujinwen.com)**
+
 ## 简介
 > 其实都是无用的话。。大佬们请直接看[使用](#使用)
 
-**体验接口：[image.i-guitar.cn](http://image.i-guitar.cn)**
 
 * 工作上经常用到图床，现有的免费图床并不好用，而且你并`不知道什么时候就关闭了`。so这个demo项目诞生了！
 
@@ -15,7 +17,7 @@
 
 ### 开箱即用
 
-1. 下载[releases](https://github.com/I-Guitar/oss-pic-bed/releases)中编译好的jar包
+1. 下载[releases](https://github.com/I-Guitar/Picbur/releases)中编译好的jar包
 
 2. 在jar包同目录下创建`conf.properties`文件，内容如下：
 
@@ -46,7 +48,7 @@
 ## 最近更新
 * 2020年03月20日  2.0.0正式版发布（重大更新，前期版本不可用）：
   * 将内置存储由 阿里OSS 改为 MinIO。自己搭建 MinIO 集群，0费用
-  * 新增测试接口 [image.i-guitar.cn](http://image.i-guitar.cn)
+  * 新增测试接口 [picbur.hujinwen.com](http://picbur.hujinwen.com)
 * 2020年03月10日  1.0.2正式版发布：
   * 修改oss bucketName硬编码错误
   * 端口号修改，由`8080`改为`8868`
