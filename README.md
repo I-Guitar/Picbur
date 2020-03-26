@@ -23,7 +23,8 @@
 
    ```properties
    # 替换 xxx 为你自己的
-   endpoint=xxx
+   # 多enpoint以分号分隔
+   endpoints=xxx
    bucketName=xxx
    accessKeyId=xxx
    secretAccessKey=xxx
@@ -46,6 +47,9 @@
 
 
 ## 最近更新
+* 2020年03月26日  2.1.0发布：
+  * MinIO客户端，由单机版改为集群
+  * 配置可添加多集群（多endpoint以分号分隔）
 * 2020年03月20日  2.0.0正式版发布（重大更新，前期版本不可用）：
   * 将内置存储由 阿里OSS 改为 MinIO。自己搭建 MinIO 集群，0费用
   * 新增测试接口 [picbur.hujinwen.com](http://picbur.hujinwen.com)
