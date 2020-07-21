@@ -1,9 +1,8 @@
 package com.joe.picBed.services.impl;
 
-import com.hujinwen.utils.EncryptUtils;
+import com.hujinwen.exception.minio.MinioPutObjectException;
 import com.hujinwen.utils.ObjectUtils;
 import com.joe.picBed.entity.UploadRecordItem;
-import com.joe.picBed.entity.exceptions.MinioPutObjectException;
 import com.joe.picBed.services.ImageStoreService;
 import com.joe.picBed.services.MyService;
 import com.joe.picBed.utils.Tools;
@@ -11,14 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
-import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
-import java.security.NoSuchAlgorithmException;
-import java.text.MessageFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -27,9 +21,6 @@ import java.util.List;
  */
 @Service
 public class MyServiceImpl implements MyService {
-    private static final ThreadLocal<SimpleDateFormat> threadLocal = ThreadLocal.withInitial(() -> new SimpleDateFormat("yyyy-MM-dd"));
-
-    private final MessageFormat pathFormat = new MessageFormat("pic-bed/{0}/{1}.{2}");
 
     @Autowired
     private ImageStoreService imageStoreService;
@@ -49,16 +40,12 @@ public class MyServiceImpl implements MyService {
      * 上传图片
      */
     @Override
-    public UploadRecordItem upload(String filename, byte[] bytes) throws IOException, NoSuchAlgorithmException, MinioPutObjectException {
-        try (
-                InputStream inputStream = new ByteArrayInputStream(bytes)
-        ) {
-            final String url = imageStoreService.putImg(getFilePath(filename, bytes), inputStream);
+    public UploadRecordItem upload(String filename, InputStream inputStream) throws IOException, MinioPutObjectException {
+        final String url = imageStoreService.putImg(Tools.getFilePath(filename), inputStream);
 
-            recordUpload(url);
+        recordUpload(url);
 
-            return uploadRecord.getLast();
-        }
+        return uploadRecord.getLast();
     }
 
     @Override
@@ -81,13 +68,6 @@ public class MyServiceImpl implements MyService {
         }
 
         ObjectUtils.serializeObj(uploadRecord, serializeFilePath);
-    }
-
-    private String getFilePath(String filename, byte[] bytes) throws NoSuchAlgorithmException {
-        String folder = threadLocal.get().format(new Date());
-        String fileName = EncryptUtils.md5(bytes);
-        String extName = Tools.getImageExtName(filename);
-        return pathFormat.format(new Object[]{folder, fileName, extName});
     }
 
 }

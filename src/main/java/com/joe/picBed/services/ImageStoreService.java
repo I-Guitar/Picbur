@@ -1,6 +1,7 @@
 package com.joe.picBed.services;
 
-import com.joe.picBed.entity.exceptions.MinioPutObjectException;
+
+import com.hujinwen.exception.minio.MinioPutObjectException;
 
 import java.io.IOException;
 import java.io.InputStream;

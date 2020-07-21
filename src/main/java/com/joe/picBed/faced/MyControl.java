@@ -26,7 +26,7 @@ public class MyControl {
     @PostMapping(value = "/imageUpload")
     @ResponseBody
     public UploadRecordItem imageUpload(@RequestParam(value = "image") MultipartFile file) throws Exception {
-        return myService.upload(file.getOriginalFilename(), file.getBytes());
+        return myService.upload(file.getOriginalFilename(), file.getInputStream());
     }
 
     @GetMapping(value = "/uploadRecords")

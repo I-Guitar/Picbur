@@ -1,12 +1,12 @@
 package com.joe.picBed.services.impl;
 
+import com.hujinwen.client.minio.MinIOCluster;
+import com.hujinwen.entity.minio.MinIONode;
+import com.hujinwen.exception.minio.MinioInitializeException;
+import com.hujinwen.exception.minio.MinioPutObjectException;
 import com.hujinwen.utils.FileUtils;
 import com.hujinwen.utils.RandomUtils;
-import com.joe.picBed.entity.MinIONode;
-import com.joe.picBed.entity.exceptions.MinioInitializeException;
-import com.joe.picBed.entity.exceptions.MinioPutObjectException;
 import com.joe.picBed.services.ImageStoreService;
-import com.joe.picBed.utils.server.MinIOCluster;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
