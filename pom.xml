@@ -38,6 +38,12 @@
             <artifactId>minio</artifactId>
             <version>6.0.13</version>
         </dependency>
+
+        <dependency>
+            <groupId>com.hujinwen</groupId>
+            <artifactId>Jtils</artifactId>
+            <version>0.5.2</version>
+        </dependency>
     </dependencies>
 
     <build>

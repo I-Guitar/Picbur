@@ -1,9 +1,9 @@
 package com.joe.picBed.utils.server;
 
+import com.hujinwen.utils.RandomUtils;
 import com.joe.picBed.entity.MinIONode;
 import com.joe.picBed.entity.exceptions.MinioInitializeException;
 import com.joe.picBed.entity.exceptions.MinioPutObjectException;
-import com.joe.picBed.utils.RandomUtils;
 import io.minio.MinioClient;
 
 import java.io.InputStream;

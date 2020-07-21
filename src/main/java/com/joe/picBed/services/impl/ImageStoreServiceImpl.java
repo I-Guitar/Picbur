@@ -1,11 +1,11 @@
 package com.joe.picBed.services.impl;
 
+import com.hujinwen.utils.FileUtils;
+import com.hujinwen.utils.RandomUtils;
 import com.joe.picBed.entity.MinIONode;
 import com.joe.picBed.entity.exceptions.MinioInitializeException;
 import com.joe.picBed.entity.exceptions.MinioPutObjectException;
 import com.joe.picBed.services.ImageStoreService;
-import com.joe.picBed.utils.RandomUtils;
-import com.joe.picBed.utils.Tools;
 import com.joe.picBed.utils.server.MinIOCluster;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -52,7 +52,7 @@ public class ImageStoreServiceImpl implements ImageStoreService {
     private void clientInit() throws IOException {
         // accessKey校验
         if (StringUtils.isEmpty(endpoint) || StringUtils.isEmpty(accessKeyId) || StringUtils.isEmpty(secretAccessKey) || StringUtils.isEmpty(bucketName)) {
-            final Properties prop = Tools.readFileForProp("conf.properties");
+            final Properties prop = FileUtils.readProperties("conf.properties");
             endpoint = prop.getProperty("endpoints");
             accessKeyId = prop.getProperty("accessKeyId");
             secretAccessKey = prop.getProperty("secretAccessKey");

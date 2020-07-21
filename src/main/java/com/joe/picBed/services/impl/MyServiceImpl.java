@@ -1,5 +1,7 @@
 package com.joe.picBed.services.impl;
 
+import com.hujinwen.utils.EncryptUtils;
+import com.hujinwen.utils.ObjectUtils;
 import com.joe.picBed.entity.UploadRecordItem;
 import com.joe.picBed.entity.exceptions.MinioPutObjectException;
 import com.joe.picBed.services.ImageStoreService;
@@ -39,7 +41,7 @@ public class MyServiceImpl implements MyService {
     @PostConstruct
     public void init() throws IOException, ClassNotFoundException {
         if (new File(serializeFilePath).exists()) {
-            uploadRecord = Tools.deserializeObj(serializeFilePath);
+            uploadRecord = ObjectUtils.deserializeObj(serializeFilePath);
         }
     }
 
@@ -78,12 +80,12 @@ public class MyServiceImpl implements MyService {
             uploadRecord.remove(0);
         }
 
-        Tools.serializeObj(uploadRecord, serializeFilePath);
+        ObjectUtils.serializeObj(uploadRecord, serializeFilePath);
     }
 
     private String getFilePath(String filename, byte[] bytes) throws NoSuchAlgorithmException {
         String folder = threadLocal.get().format(new Date());
-        String fileName = Tools.md5(bytes);
+        String fileName = EncryptUtils.md5(bytes);
         String extName = Tools.getImageExtName(filename);
         return pathFormat.format(new Object[]{folder, fileName, extName});
     }
