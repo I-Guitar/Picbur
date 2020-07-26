@@ -10,6 +10,7 @@ import com.joe.picBed.utils.Tools;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.*;
@@ -60,25 +61,6 @@ public class SwingClient {
         }
     }
 
-    public static void main(String[] args) {
-        final SwingClient swingClient = new SwingClient();
-
-        final JFrame jFrame = new JFrame();
-
-        final CardLayout cardLayout = new CardLayout();
-
-        final Container contentPane = jFrame.getContentPane();
-        contentPane.setLayout(cardLayout);
-
-        swingClient.createUpdatePanel(jFrame, cardLayout);
-        swingClient.createPassPanel(jFrame, cardLayout);
-
-        cardLayout.show(contentPane, "updatePanel");
-
-        jFrame.setVisible(true);
-        jFrame.pack();
-        jFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    }
 
     /**
      * 创建校验面板
@@ -199,5 +181,57 @@ public class SwingClient {
             }
         });
     }
+
+    /**
+     * 创建菜单
+     */
+    private void createMenu(JFrame frame) {
+        final JMenuBar menuBar = new JMenuBar();
+        final JMenu menu = new JMenu("File");
+        final JMenu menu1 = new JMenu("Edit");
+
+        menuBar.add(menu);
+        menuBar.add(menu1);
+
+        final JMenuItem jMenuItem = new JMenuItem("Quit", KeyEvent.SHIFT_MASK);
+        jMenuItem.addActionListener(e -> {
+            final int sel = JOptionPane.showConfirmDialog(frame, "你选择了 Quit", "这是确认对话框", JOptionPane.YES_NO_CANCEL_OPTION);
+            if (sel == JOptionPane.YES_OPTION) {
+                System.exit(0);
+            }
+        });
+        menu.add(jMenuItem);
+
+        final JMenuItem jMenuItem1 = new JMenuItem("Save");
+        jMenuItem1.addActionListener(e -> {
+            JOptionPane.showMessageDialog(frame, "你选择了 Save", "这是输出信息对话框！", JOptionPane.PLAIN_MESSAGE);
+        });
+        menu1.add(jMenuItem1);
+
+        frame.setJMenuBar(menuBar);
+    }
+
+
+    public static void main(String[] args) {
+        final SwingClient swingClient = new SwingClient();
+
+        final JFrame jFrame = new JFrame();
+
+        final CardLayout cardLayout = new CardLayout();
+
+        final Container contentPane = jFrame.getContentPane();
+        contentPane.setLayout(cardLayout);
+
+        swingClient.createMenu(jFrame);
+        swingClient.createUpdatePanel(jFrame, cardLayout);
+        swingClient.createPassPanel(jFrame, cardLayout);
+
+        cardLayout.show(contentPane, "updatePanel");
+
+        jFrame.setVisible(true);
+        jFrame.pack();
+        jFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    }
+
 
 }
