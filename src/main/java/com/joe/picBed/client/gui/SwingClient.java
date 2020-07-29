@@ -21,6 +21,8 @@ import java.util.Properties;
 
 /**
  * Created by joe on 2020/7/21
+ * <p>
+ * swing客户端
  */
 public class SwingClient {
 
