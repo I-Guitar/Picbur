@@ -1,7 +1,7 @@
-package com.joe.picBed.faced;
+package com.joe.picBed.control;
 
 import com.joe.picBed.entity.UploadRecordItem;
-import com.joe.picBed.services.MyService;
+import com.joe.picBed.services.PicburService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -13,10 +13,10 @@ import java.util.List;
  * Create by joe on 2019/6/12
  */
 @Controller
-public class MyControl {
+public class PicburControl {
 
     @Autowired
-    private MyService myService;
+    private PicburService myService;
 
     @GetMapping("/")
     public String index() {

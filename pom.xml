@@ -32,11 +32,16 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.aliyun.oss</groupId>
+            <artifactId>aliyun-sdk-oss</artifactId>
+            <version>3.10.2</version>
+        </dependency>
 
         <dependency>
             <groupId>com.hujinwen</groupId>
-            <artifactId>Jtils</artifactId>
-            <version>0.5.2</version>
+            <artifactId>Jokit</artifactId>
+            <version>0.5.4</version>
         </dependency>
     </dependencies>
 
@@ -55,7 +60,7 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
-                    <mainClass>com.joe.picBed.PicBedApplication</mainClass>
+                    <mainClass>com.joe.picBed.PicburApplication</mainClass>
                 </configuration>
                 <executions>
                     <execution>

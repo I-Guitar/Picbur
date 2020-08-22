@@ -1,12 +1,11 @@
-package com.joe.picBed.services.impl;
+package com.joe.picBed.services;
 
-import com.hujinwen.exception.minio.MinioPutObjectException;
+import com.hujinwen.exceptions.minio.MinioPutObjectException;
 import com.hujinwen.utils.ObjectUtils;
+import com.joe.picBed.core.ImgStoreFactory;
 import com.joe.picBed.entity.UploadRecordItem;
-import com.joe.picBed.services.ImageStoreService;
-import com.joe.picBed.services.MyService;
+import com.joe.picBed.services.ImgStore.ImgStoreService;
 import com.joe.picBed.utils.Tools;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
@@ -18,15 +17,20 @@ import java.util.List;
 
 /**
  * Created by joe on 2019/6/16
+ * <p>
+ * 核心service实现
  */
 @Service
-public class MyServiceImpl implements MyService {
+public class PicburServiceImpl implements PicburService {
 
-    @Autowired
-    private ImageStoreService imageStoreService;
-
+    /**
+     * 图片上传记录
+     */
     private LinkedList<UploadRecordItem> uploadRecord = new LinkedList<>();
 
+    /**
+     * 序列化存储位置
+     */
     private final String serializeFilePath = "./upload_record_cache";
 
     @PostConstruct
@@ -41,10 +45,10 @@ public class MyServiceImpl implements MyService {
      */
     @Override
     public UploadRecordItem upload(String filename, InputStream inputStream) throws IOException, MinioPutObjectException {
-        final String url = imageStoreService.putImg(Tools.getFilePath(filename), inputStream);
-
+        final ImgStoreService storeServer = ImgStoreFactory.getStoreServer();
+        final String url = storeServer.putImg(Tools.getFilePath(filename), inputStream);
+        inputStream.close();
         recordUpload(url);
-
         return uploadRecord.getLast();
     }
 

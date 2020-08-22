@@ -2,8 +2,8 @@ package com.joe.picBed.client.gui;
 
 import com.hujinwen.client.minio.MinIOCluster;
 import com.hujinwen.entity.minio.MinIONode;
-import com.hujinwen.exception.minio.MinioInitializeException;
-import com.hujinwen.exception.minio.MinioPutObjectException;
+import com.hujinwen.exceptions.minio.MinioInitializeException;
+import com.hujinwen.exceptions.minio.MinioPutObjectException;
 import com.hujinwen.utils.FileUtils;
 import com.hujinwen.utils.RandomUtils;
 import com.joe.picBed.utils.Tools;

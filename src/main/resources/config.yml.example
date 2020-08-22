@@ -1,0 +1,11 @@
+minIOStore:
+  endpoints:
+  bucketName:
+  accessKeyId:
+  secretAccessKey:
+ossStore:
+  endpoints:
+  bucketName:
+  accessKeyId:
+  secretAccessKey:
+

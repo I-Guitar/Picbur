@@ -1,4 +1,4 @@
-package com.joe.picBed.conf;
+package com.joe.picBed.conf.spring;
 
 import org.springframework.boot.web.servlet.MultipartConfigFactory;
 import org.springframework.context.annotation.Bean;
@@ -9,7 +9,7 @@ import javax.servlet.MultipartConfigElement;
 
 /**
  * Created by joe on 2019/10/5
- *
+ * <p>
  * spring 配置类
  */
 @Configuration
