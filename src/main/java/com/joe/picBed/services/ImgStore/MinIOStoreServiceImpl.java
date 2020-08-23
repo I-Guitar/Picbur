@@ -26,7 +26,7 @@ public class MinIOStoreServiceImpl implements ImgStoreService {
     private static final MessageFormat URL_FORMAT = new MessageFormat("{0}/{1}/{2}");
 
     public MinIOStoreServiceImpl() {
-        config = PicburContext.getConf().getMinIOStore();
+        config = PicburContext.getConfig().getMinIOStore();
     }
 
     private void clientInit() {

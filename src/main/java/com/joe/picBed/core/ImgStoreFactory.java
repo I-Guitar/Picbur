@@ -1,5 +1,6 @@
 package com.joe.picBed.core;
 
+import com.hujinwen.utils.ObjectUtils;
 import com.joe.picBed.conf.PicburConf;
 import com.joe.picBed.services.ImgStore.ImgStoreService;
 import com.joe.picBed.services.ImgStore.MinIOStoreServiceImpl;
@@ -15,12 +16,12 @@ public class ImgStoreFactory {
     private static final OSSStoreServiceImpl ossStoreServer = new OSSStoreServiceImpl();
 
     public static ImgStoreService getStoreServer() {
-        final PicburConf picburConf = PicburContext.getConf();
+        final PicburConf picburConf = PicburContext.getConfig();
 
-        if (!picburConf.getMinIOStore().isEmpty()) {
+        if (ObjectUtils.isNotEmpty(picburConf.getMinIOStore()) && !picburConf.getMinIOStore().isEmpty()) {
             return minIOStoreServer;
         }
-        if (!picburConf.getOssStore().isEmpty()) {
+        if (ObjectUtils.isNotEmpty(picburConf.getOssStore()) && !picburConf.getOssStore().isEmpty()) {
             return ossStoreServer;
         }
         throw new RuntimeException("At least one OSS configuration or Minio configuration is required.");

@@ -25,7 +25,7 @@ public class OSSStoreServiceImpl implements ImgStoreService {
     private static final MessageFormat URL_FORMAT = new MessageFormat("https://{0}.{1}/{2}");
 
     public OSSStoreServiceImpl() {
-        config = PicburContext.getConf().getOssStore();
+        config = PicburContext.getConfig().getOssStore();
     }
 
     @Override

@@ -13,7 +13,7 @@ import javax.servlet.MultipartConfigElement;
  * spring 配置类
  */
 @Configuration
-public class SpringConfiguration {
+public class SpringConf {
 
     @Bean
     public MultipartConfigElement multipartConfigElement() {
