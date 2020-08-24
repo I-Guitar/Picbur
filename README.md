@@ -31,11 +31,28 @@
 
 ### 自行编译
 
-1. 将`resources`中的`config.yml.example`文件拷贝一份命名为`config.yml`。
-2. 按照[配置详解（config.yml）](#配置详解（config.yml）)提示填上你自己的内容
-3. mvn package打包
-4. java -jar运行jar包
-5. `http://<ip>:8868` 访问
+1. 该项目依赖我的另一个项目[Jokit]()（一个java工具包）。由于没有放到中央项目所有需要先clone该项目，执行mvn install安装到本地，注意pom.xml中版本号是否一致。
+
+   ```bash
+   # clone代码
+   git clone https://github.com/hu-jinwen/Jokit.git
+   # 进入目录
+   cd Jokit
+   # 安装到maven本地仓库
+   mvn install
+   ```
+
+   
+
+2. 将`resources`中的`config.yml.example`文件拷贝一份命名为`config.yml`。
+
+3. 按照[配置详解（config.yml）](#配置详解（config.yml）)提示填上你自己的内容
+
+4. mvn package打包
+
+5. java -jar运行jar包
+
+6. `http://<ip>:8868` 访问
 
 
 
@@ -121,5 +138,6 @@
 * 将端口号外置，配置文件外置
 * 批量上传（一次选多张图，选择文件夹）
 * 通过图片URL上传
+
 
 
