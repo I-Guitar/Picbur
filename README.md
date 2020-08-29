@@ -1,7 +1,5 @@
 # Joe's picture bed
 
-**大改动，README稍后更新**
-
 [TOC]
 
 
@@ -115,7 +113,7 @@
 
 4. 获取`accessKeyId`和`secretAccessKey`
    获取accessKeyId和secretAccessKey
-   ![](http://minio1.hujinwen.com/joe-data/pic-bed/2020-08-23/d29a841f8e5206c0f770b696dcd10e4b.png)
+   ![](http://minio.hujinwen.com/joe-data/pic-bed/2020-08-29/c2facd2097901902d07ef5e4ae1c6152.png)
 
 
 ## 最近更新
