@@ -7,7 +7,6 @@ import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
@@ -16,6 +15,11 @@ import java.io.InputStream;
  * Created by hu-jinwen on 2020/8/22
  */
 public class PicburContext implements ApplicationContextAware {
+
+    /**
+     * 默认配置文件名称
+     */
+    private static final String CONFIG_FILENAME = "config.yml";
 
     private static ApplicationContext springContext;
 
@@ -42,21 +46,12 @@ public class PicburContext implements ApplicationContextAware {
     }
 
     private static void loadConfig() {
-        final String fileName = "config.yml";
-        InputStream inputStream = FileUtils.getResourceAsStream(fileName);
-        // 编译时无配置文件的情况
-        if (inputStream == null) {
-            final File file = new File(fileName);
-            if (file.exists()) {
-                try {
-                    inputStream = new FileInputStream(file);
-                } catch (FileNotFoundException ignored) {
-                }
-            } else {
-                throw new MissConfFileException("Missing configuration file named 'config.yml'. please check.");
-            }
+        try {
+            InputStream inputStream = new FileInputStream(CONFIG_FILENAME);
+            config = FileUtils.loadYamlFile(inputStream, PicburConf.class);
+        } catch (FileNotFoundException e) {
+            throw new MissConfFileException("Missing configuration file named 'config.yml'. please check.", e);
         }
-        config = FileUtils.loadYamlFile(inputStream, PicburConf.class);
     }
 
 

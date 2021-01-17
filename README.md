@@ -2,6 +2,7 @@
 
 [TOC]
 
+> TODO 添加了docker部署，README文件待更新。
 
 **体验接口：[picbur.hujinwen.com](http://picbur.hujinwen.com)**
 
